@@ -4,14 +4,18 @@ var webpack = require('webpack');
 module.exports = {
   entry: './client/entry.js',
   output: {
-    path: path.join(__dirname, './server/public'),
+    path: path.join(__dirname, './server/static'),
     filename: 'bundle.js'
+  },
+  resolve: {
+    root: path.resolve('.'),
+    extensions: ['', '.js', '.ts']
   },
   devtool: 'eval-source-map',
   module: {
     loaders: [
       {
-        test: path.join(__dirname, './client/scripts/'),
+        test: /\.js$/,
         loader: 'babel',
         exlude: /node_modules/,
           query: {
@@ -33,7 +37,7 @@ module.exports = {
         },
         {
         test: /\.ts$/,
-        loaders: ['awesome-typescript-loader', 'angular2-template-loader']
+        loaders: ['ts', 'angular2-template-loader']
         },
         {
           test: /\.woff|\.woff2|\.eot/,
