@@ -1,10 +1,14 @@
-from flask import Flask, jsonify, current_app
+from flask import Flask, jsonify, current_app, render_template
 
 app = Flask(__name__, static_url_path='/')
 
 @app.route('/')
 def index():  
-    return current_app.send_static_file('index.html')
+    return render_template('index.html')
+
+
+
+
      
 
 @app.route('/data')
