@@ -1,10 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, current_app
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/')
 
 @app.route('/')
-def index():
-    return 'Flask is running! Lets start Hacking! Mac ist nicht scheisse!'
+def index():  
+    return current_app.send_static_file('index.html')
+     
 
 @app.route('/data')
 def names():
