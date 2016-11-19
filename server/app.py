@@ -30,13 +30,13 @@ def network():
     msg = builder.do(content["command"], content["parameters"])
     cache.set('builder', builder)
 
-    return jsonify({"msg" : msg})
+    return jsonify(builder.to_dict())
      
 
 @app.route('/data')
 def names():
     data = {"names": ["Test","Data"]}
-    return jsonify(data)
+    return builder.model.to_json()
 
 if __name__ == '__main__':
     app.run(processes=1, debug=True)

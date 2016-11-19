@@ -1,7 +1,9 @@
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Dropout
+
 import numpy as np
+import json
 
 
 
@@ -89,6 +91,16 @@ class NetworkBuilder:
     def reset(self, parameters):
 
         self.model = Sequential()
+
+    def to_dict(self):
+        [weights, bias] = self.model.get_weights()
+        weights = weights.reshape(-1,).tolist()
+        bias = bias.tolist()
+        data = json.loads(self.model.to_json())
+        data["W"] = weights
+        data["b"] = bias
+
+        return data
 
 
     def train(self, parameters):
