@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { Network } from './network.component';
 import { Layer } from './layer.component';
 
+import {NetworkService} from './network.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,9 @@ import { Layer } from './layer.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    NetworkService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

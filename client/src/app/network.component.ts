@@ -6,11 +6,13 @@
  */
 import { Component, NgZone } from '@angular/core';
 import {Layer} from './layer.component';
+import {NetworkService} from './network.service';
 
 @Component({
   selector: 'network',
   templateUrl: './network.component.html',
-  styleUrls: ['./network.component.css']
+  styleUrls: ['./network.component.css'],
+  providers: [NetworkService]
 })
 export class Network {
   title = 'App is cool!';
@@ -19,7 +21,7 @@ export class Network {
 
 
 
-  constructor(zone: NgZone) {
+  constructor(zone: NgZone, private netService: NetworkService) {
 
     this.layers = [new Layer(), new Layer(), new Layer()];
     this.zone = zone;
@@ -27,6 +29,7 @@ export class Network {
   }
 
   clicked() {
+    this.netService.sendCommandToNetwork("add_layer", {input_size: 2, output_size:2});
   }
 
   public addLayer(text: string) {

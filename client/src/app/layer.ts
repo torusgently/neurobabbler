@@ -1,4 +1,4 @@
-export class Network {
+export class Layer {
     W: number[];
     bias: number[];
 

@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, current_app, render_template, request
+from flask_cors import CORS, cross_origin
+
 import sys
 from flask.ext.cache import Cache
 
@@ -9,6 +11,7 @@ builder = None
 
 
 app = Flask(__name__, static_url_path='/static')
+CORS(app)
 cache = Cache(app,config={'CACHE_TYPE': 'simple'})
 
 
