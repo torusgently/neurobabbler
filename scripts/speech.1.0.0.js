@@ -189,6 +189,7 @@ var Bing;
         var ret;
         if (json !== null && json != 'undefined') {
             ret = JSON.parse(json);
+            installer.show(ret)
         }
         return ret;
     }
@@ -346,8 +347,8 @@ var Bing;
         function Speech() {
             this._firstAudio = true;
             this.playbackAudioFilesOverride = false;
-            this.grammars = null;
-            this.lang = "en-US";
+            this.grammars = ["activation","rectify linear unit","Relu"];
+            this.lang = "en-GB";
             this.continuous = false;
             this.interimResults = true;
             this.maxAlternatives = -1;
