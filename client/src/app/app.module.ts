@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { Network } from './network.component';
+import { Layer } from './layer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Network,
+    Layer
   ],
   imports: [
     BrowserModule,
