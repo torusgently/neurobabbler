@@ -1,1 +1,2 @@
-require('./modules/app.module.ts');
+require('shim')
+require('./app.module.ts');
