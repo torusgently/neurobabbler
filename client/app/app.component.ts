@@ -2,23 +2,16 @@ import { Component } from '@angular/core';
 
 import { ZingChart } from './zingchart.component';
 import { Chart } from './chart.model';
+
 @Component({
   selector: 'my-app',
-  styles: [`
-  `],
-  template: `
-    <div class="jumbotron text-center">
-      <h1>The App Lives!</h1>
-      <p>{{ message }}</p>
-      <zingchart *ngFor="let chart of charts" [chart]="chart"></zingchart>
-    </div>
-`,
-    directives: [ZingChart]
+  template: '<zingchart *ngFor="let chart of charts" [chart]="chart"></zingchart>',
+  directives: [ZingChart]
 })
 export class AppComponent {
-    message = 'And this is a Chart!';
-    charts: Chart[];
-    constructor () {
+  charts: Chart[];
+  
+  constructor () {
     this.charts = [
       {
         id: 'chart-1',
