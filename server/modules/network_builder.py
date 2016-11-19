@@ -14,7 +14,10 @@ class NetworkBuilder:
             "add_layer" : self.add_layer,
             "train" : self.train,
             "compile" : self.compile,
-            "flatten" : self.flatten
+            "flatten" : self.flatten,
+            "dropout" : self.dropout,
+            "reset" : self.reset,
+            "pop" : self.pop
         }
 
         #XOR dataset
@@ -79,6 +82,13 @@ class NetworkBuilder:
           metrics=['accuracy'])
 
         return "Successfully compiled model"
+
+    def pop(self, parameters):
+        self.model.pop()
+
+    def reset(self, parameters):
+
+        self.model = Sequential()
 
 
     def train(self, parameters):
