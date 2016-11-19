@@ -4,14 +4,14 @@ var webpack = require('webpack');
 module.exports = {
   entry: './client/entry.js',
   output: {
-    path: path.join(__dirname, 'server/public'),
+    path: path.join(__dirname, './server/public'),
     filename: 'bundle.js'
   },
   devtool: 'eval-source-map',
   module: {
     loaders: [
       {
-        test: path.join(__dirname, 'src/scripts/'),
+        test: path.join(__dirname, './client/scripts/'),
         loader: 'babel',
         exlude: /node_modules/,
           query: {
@@ -30,6 +30,10 @@ module.exports = {
         {
             test: /\.json$/,
             loader: 'json'
+        },
+        {
+        test: /\.ts$/,
+        loaders: ['awesome-typescript-loader', 'angular2-template-loader']
         },
         {
           test: /\.woff|\.woff2|\.eot/,
