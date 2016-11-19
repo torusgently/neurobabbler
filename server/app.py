@@ -1,12 +1,16 @@
 from flask import Flask, jsonify, current_app, render_template, request
 import sys
+from flask.ext.cache import Cache
 
 from modules.network_builder import NetworkBuilder
 
 global_variables = {}
 builder = None
 
+
 app = Flask(__name__, static_url_path='/static')
+cache = Cache(app,config={'CACHE_TYPE': 'simple'})
+
 
 @app.route('/')
 def index():
@@ -15,14 +19,18 @@ def index():
 
 @app.route('/network', methods=['POST', 'GET'])
 def network():
-    content = request.json
-    global builder
+    content = request.get_json()
 
-    if(builder == None):
+    builder = cache.get('builder')
+
+    if(builder is None):
         builder = NetworkBuilder("sequential")
-    builder.add_layer(content.parameters)
+        cache.set('builder', builder, timeout=20*60)
 
-    return jsonify({"msg" : "success", "type" : "cool"})
+    msg = builder.do(content["command"], content["parameters"])
+    cache.set('builder', builder)
+
+    return jsonify({"msg" : msg})
      
 
 @app.route('/data')
@@ -31,4 +39,4 @@ def names():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(processes=4)
+    app.run(processes=1, debug=True)
