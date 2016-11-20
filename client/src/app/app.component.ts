@@ -8,7 +8,7 @@ import {NetworkService} from './network.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'App is cool!';
+  title = 'Listen when neurons speak!';
   msg: string;
   network: any;
 
