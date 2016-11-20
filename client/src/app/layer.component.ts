@@ -1,17 +1,33 @@
 /**
  * Created by Jimmy on 19/11/2016.
  */
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, trigger,
+  state,
+  style,
+  transition,
+  animate} from '@angular/core';
 declare var $: any;
 declare var Highcharts: any;
 import {AfterViewInit} from '@angular/core';
 
 
 @Component({
-  selector: 'layer',
-  templateUrl: './layer.component.html',
-  styleUrls: ['./layer.component.css'],
-  inputs: ['id', 'weights', 'bias', 'title']
+    selector: 'layer',
+    templateUrl: './layer.component.html',
+    styleUrls: ['./layer.component.css'],
+    inputs: ['id', 'weights', 'bias', 'title'],
+    animations: [
+  trigger('flyInOut', [
+    state('in', style({transform: 'translateX(0)'})),
+    transition('void => *', [
+      style({transform: 'translateX(-100%)'}),
+      animate(100)
+    ]),
+    transition('* => void', [
+      animate(100, style({transform: 'translateX(100%)'}))
+    ])
+  ])
+]
 })
 export class Layer implements  AfterViewInit{
   public title = 'App is cool!';
