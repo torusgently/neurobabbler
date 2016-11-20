@@ -18,41 +18,63 @@ export class Layer implements  AfterViewInit{
   public weights: number[];
   public bias: number[];
   public id: string;
-
+  public width = 1.;
 
   constructor(private zone: NgZone) {
-    window["Layer"] = Layer;
+      window["Layer"] = Layer;
+
   }
 
   ngAfterViewInit() {
 
-    var id = this.id;
+      var id = this.id;
+      var width = $(document).width()*this.width;
+      var weights = this.weights
 
     this.zone.run(() => {
       console.log("After view init!");
       $(function () {
         var myChart = Highcharts.chart(id, {
-          chart: {
-            type: 'bar'
-          },
-          title: {
-            text: 'Fruit Consumption'
-          },
-          xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-          },
-          yAxis: {
-            title: {
-              text: 'Fruit eaten'
-            }
-          },
+            chart: {
+               type: 'column',
+               margin: [60, 10, 40, 40],
+               width: width
+           },
+           title: {
+               text: 'Weight Development',
+               x: 25
+           },
+           legend: {
+               enabled: false
+           },
+           credits: {
+               enabled: false
+           },
+           exporting: {
+               enabled: false
+           },
+           tooltip: {},
+           plotOptions: {
+               series: {
+                   pointPadding: 0,
+                   groupPadding: 0,
+                   borderWidth: 0.5,
+                   borderColor: 'rgba(255,255,255,0.5)',
+                   color: Highcharts.getOptions().colors[1]
+               }
+           },
+           xAxis: {
+               title: {
+                   text: ''
+               }
+           },
+           yAxis: {
+               title: {
+                   text: 'Weight Strength'
+               }
+           },
           series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
-          }, {
-            name: 'John',
-            data: [5, 7, 3]
-          }]
+              name: 'Distribution', data : weights}]
         });
       });
 
