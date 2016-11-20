@@ -33,8 +33,10 @@ def network():
 
     msg = builder.do(content["command"], content["parameters"])
     cache.set('builder', builder)
-
-    return jsonify(builder.to_dict())
+    try:
+        return jsonify(builder.to_dict())
+    except e:
+        return jsonify(e)
      
 
 @app.route('/data')

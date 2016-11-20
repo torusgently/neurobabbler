@@ -40,13 +40,13 @@ function start() {
   var mode = getMode();
   var luisCfg = getLuisConfig();
 
-  if (luisCfg) {
+  if (luisCfg && !client) {
     client = Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionServiceFactory.createMicrophoneClientWithIntent(
       getLanguage(),
       getKey(),
       luisCfg.appid,
       luisCfg.subid);
-  } else {
+  } else if(!client) {
     client = Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionServiceFactory.createMicrophoneClient(
       mode,
       getLanguage(),
@@ -57,22 +57,25 @@ function start() {
   setTimeout(function () {
     console.log("End speech recognition");
     client.endMicAndRecognition();
-  }, 5000);
+  }, 7000);
 
   console.log("After");
   client.onPartialResponseReceived = function (response) {
-    console.log(response);
+    response =JSON.parse(response)
+    console.log(response.intents);
     app.speechRecognized(response)
   }
 
   client.onFinalResponseReceived = function (response) {
+    response =JSON.parse(response)
     console.log(response.intents);
     app.speechRecognized(response)
 
   }
 
   client.onIntentReceived = function (response) {
-    console.log(response);
+    response =JSON.parse(response)
+    console.log(response.intents);
     app.speechRecognized(response)
 
   };

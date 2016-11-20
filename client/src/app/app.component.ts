@@ -20,18 +20,21 @@ export class AppComponent {
 
     var t = this;
     this.zone.run(() => {
-      var intent = resp.intents[0].intent;
-      var entities = resp.entities;
+
+      console.log(resp)
+      var intent = resp["intents"][0]["intent"];
+      var entities = resp["entities"];
       var input_size = undefined;
       var output_size = undefined;
+      var query = resp['query'];
 
       console.log("The intent was: " + intent);
 
       for (let entity of entities) {
         if (entity.type == "inputSize") {
-          input_size = entity.entity;
+          input_size = entity["entity"];
         } else if (entity.type == "outputSize") {
-          output_size = entity.entity;
+          output_size = entity["entity"];
         }
       }
 
@@ -48,6 +51,9 @@ export class AppComponent {
 
       if (intent.indexOf("layer") != -1) {
 
+        if(query.indexOf('one') != -1) {
+          output_size = 1;
+        }
         command = "add_layer";
         console.log("Added layer")
         t.msg = "Added layer";
@@ -75,6 +81,11 @@ export class AppComponent {
 
       } else {
         //Input not recognized
+        t.msg = "Did not understand, please can you repeat?";
+        return;
+      }
+
+      if(output_size == undefined && command == 'add_layer') {
         t.msg = "Did not understand, please can you repeat?";
         return;
       }
