@@ -31,6 +31,7 @@ export class NetworkService {
        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
        let options = new RequestOptions({ headers: headers }); // Create a request option
 
+       debugger;
        return this.http.post(this.networkUrl, body, options) // ...using post request
          .map(this.responseToServer).toPromise()
          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
