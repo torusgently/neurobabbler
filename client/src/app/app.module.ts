@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { Network } from './network.component';
 import { Layer } from './layer.component';
+import { TextAreaComponent } from './text-area.component'
 
 import {NetworkService} from './network.service';
 
@@ -13,7 +14,8 @@ import {NetworkService} from './network.service';
   declarations: [
     AppComponent,
     Network,
-    Layer
+      Layer,
+      TextAreaComponent
   ],
   imports: [
     BrowserModule,
