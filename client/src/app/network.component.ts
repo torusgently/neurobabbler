@@ -5,8 +5,9 @@
  * Created by Jimmy on 19/11/2016.
  */
 import { Component, NgZone, OnChanges, SimpleChanges } from '@angular/core';
-import {Layer} from './layer';
+import {LayerData} from './layer';
 import {NetworkService} from './network.service';
+
 
 @Component({
   selector: 'network',
@@ -17,7 +18,7 @@ import {NetworkService} from './network.service';
 })
 export class Network implements OnChanges{
   title = 'App is cool!';
-  layers: Layer[];
+  layers: LayerData[];
 
   public state: any;
   public msg: string;
@@ -40,23 +41,17 @@ export class Network implements OnChanges{
       if(typeof curr === 'undefined') {
           console.log("No Current State");
       } else{
+          console.log("WHAAAATS UUUP");
           console.log(curr);
-      //Logik...
-          for(let el in curr) {
-              console.log(el)
-          if(typeof this.layers[el.id] === 'undefined') {
-              var layer = new Layer({'id': el.id, 'weights': el.weights, 'bias': el.bias});
-              // layer.id =  curr[i].id;
-              // layer.weights =  curr[i].weights;
-              // layer.bias =  curr[i].bias;
+          //Logik...
+          this.layers = [];
+          for(var i;i < curr.length; i++) {
+            
+              var layer = new LayerData();
+              layer.id = curr[i].id;
+              layer.weights = curr[i].weights;
+              layer.bias = curr[i].bias;
               this.layers.push(layer);
-          }
-          else {
-              this.layers[el.id].id = el.id;
-              this.layers[el.id].weights = el.weights;
-              this.layers[el.id].bias = el.bias;
-          }
-
       }
       }
   }

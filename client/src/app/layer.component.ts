@@ -9,7 +9,7 @@ import { Component, NgZone, trigger,
 declare var $: any;
 declare var Highcharts: any;
 import {AfterViewInit} from '@angular/core';
-
+import {LayerData} from './layer';
 
 @Component({
     selector: 'layer',

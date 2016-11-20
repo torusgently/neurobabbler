@@ -113,7 +113,7 @@ export class AppComponent {
       this.network = this.netService.sendCommandToNetwork(command, parameters).then(function(data) {
         console.log(data);
         t.network = data;
-        debugger;
+//        debugger;
       });
 
       console.log("The network is");
