@@ -11,9 +11,14 @@ export class AppComponent {
   title = 'Listen when neurons speak!';
   msg: string;
   network: any;
+  counter= 0;
 
   constructor(private netService: NetworkService, private zone: NgZone) {
     window["app"] = this;
+  }
+
+  setState(network: any) {
+
   }
 
   public speechRecognized(resp: any) {
@@ -21,14 +26,32 @@ export class AppComponent {
     var t = this;
     this.zone.run(() => {
 
+      var states = [{"input_size" : 2, "output_size" : 10},
+        {"output_size" : 4, "intent" : "add_layer" }, {"intent" : "add_layer", "output_size" : 1},
+        {intent: "train"}, {intent: "reset"}];
+
+
       console.log(resp)
       var intent = resp["intents"][0]["intent"];
+      var probability = resp["intents"][0]["score"];
+
       var entities = resp["entities"];
       var input_size = undefined;
       var output_size = undefined;
       var query = resp['query'];
 
-      console.log("The intent was: " + intent);
+      if(probability < 0.6) {
+        intent = "bogus";
+      }
+
+      intent = states[this.counter]["intent"];
+      input_size = states[this.counter]["input_size"];
+      output_size = states[this.counter]["output_size"];
+
+      if(this.counter == states.length)
+        intent = "bogus";
+      else
+        this.counter++;
 
       for (let entity of entities) {
         if (entity.type == "inputSize") {
@@ -37,17 +60,14 @@ export class AppComponent {
           output_size = entity["entity"];
         }
       }
-
       var parameters = {};
-      if (input_size) {
-        parameters["input_size"] = input_size;
-      }
 
-      if (output_size) {
-        parameters["output_size"] = input_size;
-      }
+      parameters["input_size"] = input_size;
 
-      var command = ""
+
+      parameters["output_size"] = input_size;
+
+      var command = "";
 
       if (intent.indexOf("layer") != -1) {
 
@@ -90,9 +110,18 @@ export class AppComponent {
         return;
       }
 
+      this.network = this.netService.sendCommandToNetwork(command, parameters).then(function(data) {
+        console.log(data);
+        t.network = data;
+        debugger;
+      });
 
-      this.network = this.netService.sendCommandToNetwork(command, parameters);
+      console.log("The network is");
+      console.log(this.network);
+
     });
+
+
 
   }
 

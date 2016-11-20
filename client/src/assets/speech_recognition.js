@@ -36,7 +36,6 @@ function getLuisConfig() {
   return null;
 }
 
-function start() {
   var mode = getMode();
   var luisCfg = getLuisConfig();
 
@@ -52,12 +51,6 @@ function start() {
       getLanguage(),
       getKey());
   }
-  client.startMicAndRecognition();
-  console.log("Start mic recognition");
-  setTimeout(function () {
-    console.log("End speech recognition");
-    client.endMicAndRecognition();
-  }, 7000);
 
   console.log("After");
   client.onPartialResponseReceived = function (response) {
@@ -79,6 +72,14 @@ function start() {
     app.speechRecognized(response)
 
   };
+
+
+function recog() {
+  client.startMicAndRecognition();
+  setTimeout(function() {
+    client.endMicAndRecognition();
+  }, 7000)
 }
 
+setInterval(recog, 8000);
 window.start = start;

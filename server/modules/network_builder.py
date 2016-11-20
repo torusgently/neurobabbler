@@ -58,7 +58,7 @@ class NetworkBuilder:
 
         if(not 'input_size' in parameters and len(self.model.layers) == 0):
             #raise Exception("input_size not defined!")
-            input_size = 2
+            parameters["input_size"] = 2
         elif not 'input_size' in parameters:
             parameters['input_size'] = None
         else:

@@ -35,7 +35,7 @@ def network():
     cache.set('builder', builder)
     try:
         return jsonify(builder.to_dict())
-    except e:
+    except Exception as e:
         return jsonify(e)
      
 
