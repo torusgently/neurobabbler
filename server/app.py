@@ -26,6 +26,7 @@ def network():
 
     builder = cache.get('builder')
 
+    print(content)
     if(builder is None):
         builder = NetworkBuilder("sequential")
         cache.set('builder', builder, timeout=20*60)

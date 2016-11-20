@@ -60,9 +60,13 @@ class NetworkBuilder:
             raise Exception("input_size not defined!")
         elif not 'input_size' in parameters:
             parameters['input_size'] = None
+        else:
+            parameters['input_size'] = int(parameters['input_size'])
 
         if(not 'output_size' in parameters):
             raise Exception("output_size is not defined!")
+        else:
+            parameters['output_size'] = int(parameters['output_size'])
 
         if(not 'activation_function' in parameters):
             parameters['activation_function'] = 'relu'

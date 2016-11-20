@@ -12,12 +12,15 @@ import {NetworkService} from './network.service';
   selector: 'network',
   templateUrl: './network.component.html',
   styleUrls: ['./network.component.css'],
-  providers: [NetworkService]
+  providers: [NetworkService],
+  inputs: ["state", "msg"]
 })
 export class Network {
   title = 'App is cool!';
   layers: Layer[];
 
+  public state: any;
+  public msg: string;
 
   constructor(private zone: NgZone, private netService: NetworkService) {
 
@@ -30,6 +33,7 @@ export class Network {
     this.netService.sendCommandToNetwork("add_layer", {input_size: 2, output_size:2});
   }
 
+
   public addLayer(text: string) {
 
   }
@@ -38,4 +42,6 @@ export class Network {
   public outsideAddLayer(text: string) {
 
   }
+
+
 }

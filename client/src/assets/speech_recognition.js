@@ -1,17 +1,15 @@
-
-
 var client;
 var request;
 
-useMic = function useMic() {
+var useMic = function useMic() {
   return true;
 }
 
-getMode = function getMode() {
+var getMode = function getMode() {
   return Microsoft.CognitiveServices.SpeechRecognition.SpeechRecognitionMode.shortPhrase;
 }
 
-getKey = function getKey() {
+var getKey = function getKey() {
   return "c83cf5413f36435eb04e14b173bcb701";
 }
 
@@ -64,21 +62,20 @@ function start() {
   console.log("After");
   client.onPartialResponseReceived = function (response) {
     console.log(response);
-    window.network.outsideAddLayer(JSON.stringify(response))
+    app.speechRecognized(response)
   }
 
   client.onFinalResponseReceived = function (response) {
-    console.log(response);
-    window.network.outsideAddLayer(JSON.stringify(response))
+    console.log(response.intents);
+    app.speechRecognized(response)
 
   }
 
   client.onIntentReceived = function (response) {
     console.log(response);
-    window.network.outsideAddLayer(JSON.stringify(response))
+    app.speechRecognized(response)
 
   };
 }
 
 window.start = start;
-
