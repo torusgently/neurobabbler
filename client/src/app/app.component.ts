@@ -26,9 +26,9 @@ export class AppComponent {
     var t = this;
     this.zone.run(() => {
 
-      var states = [{"input_size" : 2, "output_size" : 10},
+      var states = [{"input_size" : 2, "output_size" : 10, "intent" : "add_layer"},
         {"output_size" : 4, "intent" : "add_layer" }, {"intent" : "add_layer", "output_size" : 1},
-        {intent: "train"}, {intent: "reset"}];
+        {intent: "compile"}, {intent: "train"}, {intent: "reset"}];
 
 
       console.log(resp)
@@ -62,18 +62,10 @@ export class AppComponent {
       }
       var parameters = {};
 
-      parameters["input_size"] = input_size;
-
-
-      parameters["output_size"] = input_size;
-
       var command = "";
 
       if (intent.indexOf("layer") != -1) {
 
-        if(query.indexOf('one') != -1) {
-          output_size = 1;
-        }
         command = "add_layer";
         console.log("Added layer")
         t.msg = "Added layer";
@@ -109,6 +101,9 @@ export class AppComponent {
         t.msg = "Did not understand, please can you repeat?";
         return;
       }
+
+      parameters["input_size"] = input_size;
+      parameters["output_size"] = output_size;
 
       this.network = this.netService.sendCommandToNetwork(command, parameters).then(function(data) {
         console.log(data);

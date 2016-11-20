@@ -36,7 +36,7 @@ def network():
     try:
         return jsonify(builder.to_dict())
     except Exception as e:
-        return jsonify(e)
+        return "Error occured " + str(e)
      
 
 @app.route('/data')

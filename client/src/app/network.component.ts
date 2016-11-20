@@ -43,6 +43,7 @@ export class Network implements OnChanges{
       } else{
           console.log("WHAAAATS UUUP");
           console.log(curr);
+
           //Logik...
           this.layers = [];
           for(var i;i < curr.length; i++) {
@@ -53,7 +54,9 @@ export class Network implements OnChanges{
               layer.bias = curr[i].bias;
               this.layers.push(layer);
       }
+
       }
+
   }
 
 
