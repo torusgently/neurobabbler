@@ -28,7 +28,7 @@ function setText(text) {
 }
 
 function getLuisConfig() {
-  var appid = "bb666b81-56bf-4fd2-a020-eaf4ba757971";
+  var appid = "4e6006ae-630d-4afa-9dac-4abe7370d81c";
   var subid = "f0932dec2b3446b6bfc9ac05a89fec7b";
 
   if (appid.length > 0 && subid.length > 0) {
@@ -63,18 +63,18 @@ function start() {
 
   console.log("After");
   client.onPartialResponseReceived = function (response) {
-    console.log("Getting response...");
+    console.log(response);
     window.network.outsideAddLayer(JSON.stringify(response))
   }
 
   client.onFinalResponseReceived = function (response) {
-    console.log("Getting response...");
+    console.log(response);
     window.network.outsideAddLayer(JSON.stringify(response))
 
   }
 
   client.onIntentReceived = function (response) {
-    console.log("Getting response...");
+    console.log(response);
     window.network.outsideAddLayer(JSON.stringify(response))
 
   };

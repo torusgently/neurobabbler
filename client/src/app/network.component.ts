@@ -5,7 +5,7 @@
  * Created by Jimmy on 19/11/2016.
  */
 import { Component, NgZone } from '@angular/core';
-import {Layer} from './layer.component';
+import {Layer} from './layer';
 import {NetworkService} from './network.service';
 
 @Component({
@@ -17,13 +17,11 @@ import {NetworkService} from './network.service';
 export class Network {
   title = 'App is cool!';
   layers: Layer[];
-  zone: NgZone;
 
 
+  constructor(private zone: NgZone, private netService: NetworkService) {
 
-  constructor(zone: NgZone, private netService: NetworkService) {
-
-    this.layers = [new Layer(), new Layer(), new Layer()];
+    this.layers = [new Layer([], [], "layer1"), new Layer([], [], "layer2"), new Layer([], [], "layer3")];
     this.zone = zone;
     window["network"] = this;
   }
@@ -34,13 +32,10 @@ export class Network {
 
   public addLayer(text: string) {
 
-    this.layers.push(new Layer());
-
   }
 
+
   public outsideAddLayer(text: string) {
-    this.zone.run(() => {
-      this.addLayer(text);
-    })
+
   }
 }

@@ -21,7 +21,7 @@ import {NetworkService} from './network.service';
     HttpModule
   ],
   providers: [
-    NetworkService
+    NetworkService,
   ],
   bootstrap: [AppComponent]
 })

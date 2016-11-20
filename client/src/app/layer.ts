@@ -1,9 +1,10 @@
 export class Layer {
-    W: number[];
-    bias: number[];
-
-    constructor(theW: number[], theBias: number[]) {
+    public W: number[];
+    public bias: number[];
+    public id: string;
+    constructor(theW: number[], theBias: number[], id: string) {
         this.W = theW;
         this.bias = theBias;
+        this.id = id;
     }
 }
