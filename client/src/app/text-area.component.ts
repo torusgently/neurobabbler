@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,  NgZone } from '@angular/core';
+import {AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+declare var $:JQueryStatic;
 
 @Component({
     selector: 'text-area',
@@ -6,8 +8,13 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./text-area.component.css'],
     inputs: ['name']
 })
-export class TextAreaComponent {
+export class TextAreaComponent  implements  AfterViewInit{
+    @ViewChild('inputText') el:ElementRef;
     public name: string;
-    public textValue = "Test Value";
-    constructor() {}
+    public textValue = "";
+    constructor(private zone: NgZone) {}
+
+    ngAfterViewInit() {
+        $(this.el.nativeElement).scrollTop =  $(this.el.nativeElement).scrollHeight;
+    }
 }
