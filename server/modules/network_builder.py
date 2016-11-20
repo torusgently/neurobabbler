@@ -65,7 +65,10 @@ class NetworkBuilder:
             parameters['input_size'] = int(parameters['input_size'])
 
         if(not 'output_size' in parameters):
-            raise Exception("output_size is not defined!")
+            if(len(self.model.layers) >= 2):
+                parameters['output_size'] = 1
+            parameters['output_size'] = 1
+            #raise Exception("output_size is not defined!")
         else:
             parameters['output_size'] = int(parameters['output_size'])
 

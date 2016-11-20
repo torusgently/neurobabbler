@@ -4,7 +4,7 @@
 /**
  * Created by Jimmy on 19/11/2016.
  */
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnChanges, SimpleChanges } from '@angular/core';
 import {Layer} from './layer';
 import {NetworkService} from './network.service';
 
@@ -15,7 +15,7 @@ import {NetworkService} from './network.service';
   providers: [NetworkService],
   inputs: ["state", "msg"]
 })
-export class Network {
+export class Network implements OnChanges{
   title = 'App is cool!';
   layers: Layer[];
 
@@ -24,7 +24,7 @@ export class Network {
 
   constructor(private zone: NgZone, private netService: NetworkService) {
 
-    this.layers = [new Layer([], [], "layer1"), new Layer([], [], "layer2"), new Layer([], [], "layer3")];
+    this.layers = [];
     this.zone = zone;
     window["network"] = this;
   }
@@ -33,8 +33,17 @@ export class Network {
     this.netService.sendCommandToNetwork("add_layer", {input_size: 2, output_size:2});
   }
 
+  ngOnChanges(changes: SimpleChanges) {
 
-  public addLayer(text: string) {
+      var prev = changes["state"].previousValue;
+      var curr = changes["state"].currentValue;
+
+      //Logik...
+
+  }
+
+
+  public addLayer(W: string) {
 
   }
 
