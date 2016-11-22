@@ -1,3 +1,4 @@
+// app component 
 import { Component, NgZone } from '@angular/core';
 
 import {NetworkService} from './network.service';
