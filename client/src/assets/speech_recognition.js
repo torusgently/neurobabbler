@@ -10,7 +10,7 @@ var getMode = function getMode() {
 }
 
 var getKey = function getKey() {
-  return "c83cf5413f36435eb04e14b173bcb701";
+  return "";
 }
 
 function getLanguage() {
@@ -26,8 +26,8 @@ function setText(text) {
 }
 
 function getLuisConfig() {
-  var appid = "4e6006ae-630d-4afa-9dac-4abe7370d81c";
-  var subid = "f0932dec2b3446b6bfc9ac05a89fec7b";
+  var appid = "";
+  var subid = "";
 
   if (appid.length > 0 && subid.length > 0) {
     return { appid: appid, subid: subid };
